@@ -7,12 +7,6 @@ from functools import partial
 
 
 def _make_divisible(ch, divisor=8, min_ch=None):
-    """
-    This function is taken from the original tf repo.
-    It ensures that all layers have a channel number that is divisible by 8
-    It can be seen here:
-    https://github.com/tensorflow/models/blob/master/research/slim/nets/mobilenet/mobilenet.py
-    """
     if min_ch is None:
         min_ch = divisor
     new_ch = max(min_ch, int(ch + divisor / 2) // divisor * divisor)
@@ -216,17 +210,7 @@ class MobileNetV3(nn.Module):
 
 def mobilenet_v3_large(num_classes: int = 1000,
                        reduced_tail: bool = False) -> MobileNetV3:
-    """
-    Constructs a large MobileNetV3 architecture from
-    "Searching for MobileNetV3" <https://arxiv.org/abs/1905.02244>.
-    weights_link:
-    https://download.pytorch.org/models/mobilenet_v3_large-8738ca79.pth
-    Args:
-        num_classes (int): number of classes
-        reduced_tail (bool): If True, reduces the channel counts of all feature layers
-            between C4 and C5 by 2. It is used to reduce the channel redundancy in the
-            backbone for Detection and Segmentation.
-    """
+   
     width_multi = 1.0
     bneck_conf = partial(InvertedResidualConfig, width_multi=width_multi)
     adjust_channels = partial(InvertedResidualConfig.adjust_channels, width_multi=width_multi)
@@ -260,17 +244,7 @@ def mobilenet_v3_large(num_classes: int = 1000,
 
 def mobilenet_v3_small(num_classes: int = 1000,
                        reduced_tail: bool = False) -> MobileNetV3:
-    """
-    Constructs a large MobileNetV3 architecture from
-    "Searching for MobileNetV3" <https://arxiv.org/abs/1905.02244>.
-    weights_link:
-    https://download.pytorch.org/models/mobilenet_v3_small-047dcff4.pth
-    Args:
-        num_classes (int): number of classes
-        reduced_tail (bool): If True, reduces the channel counts of all feature layers
-            between C4 and C5 by 2. It is used to reduce the channel redundancy in the
-            backbone for Detection and Segmentation.
-    """
+    
     width_multi = 1.0
     bneck_conf = partial(InvertedResidualConfig, width_multi=width_multi)
     adjust_channels = partial(InvertedResidualConfig.adjust_channels, width_multi=width_multi)
