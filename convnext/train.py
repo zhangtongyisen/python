@@ -126,8 +126,6 @@ if __name__ == '__main__':
     parser.add_argument('--data-path', type=str,
                         default="/data/flower_photos")
 
-    # 预训练权重路径，如果不想载入就设置为空字符
-    # 链接: https://pan.baidu.com/s/1aNqQW4n_RrUlWUBNlaJRHA  密码: i83t
     parser.add_argument('--weights', type=str, default='./convnext_tiny_1k_224_ema.pth',
                         help='initial weights path')
     # 是否冻结head以外所有权重
